@@ -3,35 +3,18 @@
 
 fun main() {
 
-    println("Введите строку символов:")
-    val inputVal = readln()
+    println("Введите строку")
 
-    var countChar = 1
-    var previousChar = inputVal[0]
-
-    for (i in 1 .. inputVal.length - 1) {
-        if (previousChar == inputVal[i]) {
-            countChar+=1
-            previousChar = inputVal[i]
+    val input = readln()
+    var count = 0
+    var inputList = input.toList().distinct().sorted() //distinct - избавиться от дубликатов; sorted - сортировка
+    var result = ""
+    for (char in inputList) {
+        for (i in 0 .. input.length - 1) {
+            if (input[i] == char) count++
         }
-        else {
-            if (countChar>1) {
-                println( previousChar + " - " + countChar)
-            }
-            else {
-                println( previousChar + " - 1" )
-            }
-            countChar = 1
-            previousChar = inputVal[i]
-        }
-
+        result += "$char - $count \n"
+        count = 0
     }
-
-    if (countChar>1) {
-        println( previousChar + " - " + countChar)
-    }
-    else {
-        println( previousChar + " - 1" )
-    }
-
+    println("Результат:\n$result")
 }
